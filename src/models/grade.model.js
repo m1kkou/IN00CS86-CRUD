@@ -6,7 +6,7 @@ var Arviointi = function (arviointi) {
   this.etunimi = arviointi.etunimi;
   this.sukunimi = arviointi.sukunimi;
   this.arvosana = arviointi.arvosana;
-  this.paivamaara = new Date();
+  this.paivamaata = new Date();
   this.nimi = arviointi.nimi;
   this.idArviointi = arviointi.idArviointi ? arviointi.idArviointi : -1;
   this.idOpiskelija = arviointi.idOpiskelija ? arviointi.idOpiskelija : -1;
@@ -76,15 +76,19 @@ Arviointi.update = function (idArviointi, arviointi, result) {
   );
 };
 
-Arviointi.delete = function (id, result) {
-  dbConn.query("DELETE FROM employees WHERE id = ?", [id], function (err, res) {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-    } else {
-      result(null, res);
+Arviointi.delete = function (idArviointi, result) {
+  dbConn.query(
+    "DELETE FROM Arviointi WHERE id = ?",
+    [idArviointi],
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        result(null, res);
+      }
     }
-  });
+  );
 };
 
 module.exports = Arviointi;
